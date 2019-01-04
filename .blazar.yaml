@@ -3,9 +3,9 @@ env:
   MAVEN_ARGS: -Drat.skip=true
 
 before:
-  - description: "Change version to 1.7-hubspot-SNAPSHOT"
+  - description: "Change version to 1.11.2-hubspot-SNAPSHOT"
     commands:
-      - sed -i 's~^  <version>1.7-SNAPSHOT</version>$~  <version>1.7-hubspot-SNAPSHOT</version>~' pom.xml
+      - sed -i 's~^  <version>1.11.2-hubspot-SNAPSHOT</version>$~  <version>1.11.2-hubspot-SNAPSHOT</version>~' pom.xml
 
 buildpack:
   host: git.hubteam.com
