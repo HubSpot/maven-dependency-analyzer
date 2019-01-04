@@ -1,0 +1,18 @@
+env:
+  SKIP_VERSION_OVERRIDE: true
+  MAVEN_ARGS: -Drat.skip=true
+
+before:
+  - description: "Change version to 1.7-hubspot-SNAPSHOT"
+    commands:
+      - sed -i 's~^  <version>1.7-SNAPSHOT</version>$~  <version>1.7-hubspot-SNAPSHOT</version>~' pom.xml
+
+buildpack:
+  host: git.hubteam.com
+  organization: HubSpot
+  repository: Blazar-Buildpack-Java
+  branch: v2
+
+stepActivation:
+  notify:
+    branches: [hubspot]
