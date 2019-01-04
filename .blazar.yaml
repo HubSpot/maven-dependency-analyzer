@@ -1,4 +1,5 @@
 env:
+  SKIP_VERSION_OVERRIDE: true
   MAVEN_ARGS: -Drat.skip=true
 
 before:
