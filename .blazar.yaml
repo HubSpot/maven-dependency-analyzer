@@ -1,5 +1,5 @@
 env:
-  SKIP_VERSION_OVERRIDE: true
+  SKIP_VERSION_OVERRIDE_ON_BRANCH: hubspot
   MAVEN_ARGS: -Drat.skip=true
 
 before:
