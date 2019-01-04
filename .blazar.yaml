@@ -5,7 +5,7 @@ env:
 before:
   - description: "Change version to 1.11.2-{branch}-SNAPSHOT"
     commands:
-      - sed -i 's~^  <version>1.11.2-SNAPSHOT</version>$~  <version>1.11.2-$GIT_BRANCH-SNAPSHOT</version>~' pom.xml
+      - sed -i "s~^  <version>1.11.2-SNAPSHOT</version>$~  <version>1.11.2-$GIT_BRANCH-SNAPSHOT</version>~" pom.xml
 
 buildpack:
   host: git.hubteam.com
