@@ -1,13 +1,14 @@
 env:
-  SKIP_VERSION_OVERRIDE_ON_BRANCH: hubspot
+  SKIP_VERSION_OVERRIDE: true
   MAVEN_ARGS: -Drat.skip=true
+
+before:
+  - description: "Change version to 1.11.2-{branch}-SNAPSHOT"
+    commands:
+      - sed -i "s~^  <version>1.11.2-SNAPSHOT</version>$~  <version>1.11.2-$GIT_BRANCH-SNAPSHOT</version>~" pom.xml
 
 buildpack:
   host: git.hubteam.com
   organization: HubSpot
   repository: Blazar-Buildpack-Java
   branch: v2
-
-stepActivation:
-  notify:
-    branches: [hubspot]
