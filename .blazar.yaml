@@ -2,12 +2,6 @@ env:
   SKIP_VERSION_OVERRIDE_ON_BRANCH: hubspot
   MAVEN_ARGS: -Drat.skip=true
 
-buildpack:
-  host: git.hubteam.com
-  organization: HubSpot
-  repository: Blazar-Buildpack-Java
-  branch: v2
-
 stepActivation:
   notify:
     branches: [hubspot]
