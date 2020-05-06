@@ -34,6 +34,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import java.util.stream.Collectors;
 
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.project.MavenProject;
@@ -82,7 +83,7 @@ public class DefaultProjectDependencyAnalyzer
                                                                                          dependencyUsages );
 
             Map<Artifact, Set<DependencyUsage>> usedDeclaredArtifacts = buildMutableCopy( usedArtifacts );
-            usedDeclaredArtifacts.keySet().retainAll( declaredArtifacts );
+            retainAll( usedDeclaredArtifacts.keySet(), declaredArtifacts );
 
             Map<Artifact, Set<DependencyUsage>> usedUndeclaredArtifacts = buildMutableCopy( usedArtifacts );
             removeAll( usedUndeclaredArtifacts.keySet(), declaredArtifacts );
@@ -100,9 +101,31 @@ public class DefaultProjectDependencyAnalyzer
     }
 
     /**
+     * This method defines a new way to retain the artifacts by using the conflict id. We don't care about the version
+     * here because there can be only 1 for a given artifact anyway.
+     *
+     * @param start initial set
+     * @param keep set to keep
+     */
+    private void retainAll( Set<Artifact> start, Set<Artifact> keep )
+    {
+        Set<String> keepIds = keep.stream()
+            .map( Artifact::getDependencyConflictId )
+            .collect( Collectors.toSet() );
+        for ( Iterator<Artifact> iterator = start.iterator(); iterator.hasNext(); )
+        {
+            Artifact artifact = iterator.next();
+            if ( !keepIds.contains( artifact.getDependencyConflictId() ) )
+            {
+                iterator.remove();
+            }
+        }
+    }
+
+    /**
      * This method defines a new way to remove the artifacts by using the conflict id. We don't care about the version
      * here because there can be only 1 for a given artifact anyway.
-     * 
+     *
      * @param start initial set
      * @param remove set to exclude
      */
