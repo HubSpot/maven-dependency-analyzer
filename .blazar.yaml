@@ -1,6 +1,6 @@
 env:
   SKIP_VERSION_OVERRIDE: true
-  MAVEN_ARGS: -Drat.skip=true
+  MAVEN_ARGS: -Drat.skip=true -Dgpg.skip=true
 
 before:
   - description: "Change version to 1.11.2-{branch}-SNAPSHOT"
