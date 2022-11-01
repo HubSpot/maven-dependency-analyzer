@@ -1,3 +1,6 @@
+buildpack:
+  name: Blazar-Buildpack-Java
+
 env:
   SKIP_VERSION_OVERRIDE: true
   MAVEN_ARGS: -Drat.skip=true -Dgpg.skip=true
@@ -7,8 +10,3 @@ before:
     commands:
       - sed -i "s~^  <version>1.11.2-SNAPSHOT</version>$~  <version>1.11.2-$GIT_BRANCH-SNAPSHOT</version>~" pom.xml
 
-buildpack:
-  host: git.hubteam.com
-  organization: HubSpot
-  repository: Blazar-Buildpack-Java
-  branch: v2
