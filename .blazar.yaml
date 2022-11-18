@@ -2,11 +2,5 @@ buildpack:
   name: Blazar-Buildpack-Java
 
 env:
-  SKIP_VERSION_OVERRIDE: true
+  SET_VERSION_OVERRIDE: "1.11.2-$GIT_BRANCH-SNAPSHOT"
   MAVEN_ARGS: -Drat.skip=true -Dgpg.skip=true
-
-before:
-  - description: "Change version to 1.11.2-{branch}-SNAPSHOT"
-    commands:
-      - sed -i "s~^  <version>1.11.2-SNAPSHOT</version>$~  <version>1.11.2-$GIT_BRANCH-SNAPSHOT</version>~" pom.xml
-
