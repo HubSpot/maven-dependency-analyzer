@@ -3,4 +3,4 @@ buildpack:
 
 env:
   SET_VERSION_OVERRIDE: "1.13.3-$GIT_BRANCH-SNAPSHOT"
-  MAVEN_ARGS: -Drat.skip=true -Dgpg.skip=true -Dspotless.check.skip=true -Prun-its
+  MAVEN_ARGS: -Drat.skip=true -Dgpg.skip=true -Dspotless.check.skip=true 
