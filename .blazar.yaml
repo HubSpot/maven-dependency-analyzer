@@ -1,5 +1,6 @@
 buildpack:
   name: Blazar-Buildpack-Java
+  branch: fix-shellcheck
 
 env:
   SET_VERSION_OVERRIDE: "1.13.3-$GIT_BRANCH-SNAPSHOT"
