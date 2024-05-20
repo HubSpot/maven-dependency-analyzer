@@ -2,5 +2,5 @@ buildpack:
   name: Blazar-Buildpack-Java
 
 env:
-  SET_VERSION_OVERRIDE: "1.13.3-$GIT_BRANCH-SNAPSHOT"
+  SET_VERSION_OVERRIDE: "1.14.0-$GIT_BRANCH-SNAPSHOT"
   MAVEN_ARGS: -Drat.skip=true -Dgpg.skip=true -Dspotless.check.skip=true
