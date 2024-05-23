@@ -64,5 +64,4 @@ public interface DependencyAnalyzer {
      * @throws IOException if an error occurs reading a JAR or .class file
      */
     Set<DependencyUsage> analyzeUsages(URL url, ClassesPatterns excludeClasses) throws IOException;
-
 }

@@ -92,7 +92,7 @@ public class ResultCollector {
                 break;
 
             case Type.METHOD:
-                addMethodDesc(t.getDescriptor());
+                addMethodDesc(usedByClass, t.getDescriptor());
                 break;
 
             case Type.OBJECT:
