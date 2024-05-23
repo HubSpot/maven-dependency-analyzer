@@ -195,7 +195,6 @@ public class DefaultMethodVisitor extends MethodVisitor {
         Arrays.stream(bootstrapMethodArguments)
                 .filter(Type.class::isInstance)
                 .map(Type.class::cast)
-                .map(Type::getDescriptor)
-                .forEach(desc -> resultCollector.addMethodDesc(usedByClass, desc));
+                .forEach(t -> resultCollector.addType(usedByClass, t));
     }
 }
