@@ -18,7 +18,15 @@
  */
 package org.apache.maven.shared.dependency.analyzer;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.maven.artifact.Artifact;
@@ -43,13 +51,13 @@ public class ProjectDependencyAnalysis {
      * <p>Constructor for ProjectDependencyAnalysis.</p>
      */
     public ProjectDependencyAnalysis() {
-        this((Map<Artifact, Set<DependencyUsage>>) null, (Map<Artifact, Set<DependencyUsage>>) null, null, null);
+        this(null, (Map<Artifact, Set<DependencyUsage>>) null, null, null);
     }
 
     /**
      * <p>Constructor for ProjectDependencyAnalysis to maintain compatibility with old API</p>
      *
-     * @param usedDeclaredArtifacts   artifacts both used and declared
+     * @param usedDeclaredArtifacts artifacts both used and declared
      * @param usedUndeclaredArtifacts artifacts used but not declared
      * @param unusedDeclaredArtifacts artifacts declared but not used
      */
@@ -63,9 +71,9 @@ public class ProjectDependencyAnalysis {
     /**
      * <p>Constructor for ProjectDependencyAnalysis.</p>
      *
-     * @param usedDeclaredArtifacts         artifacts both used and declared
-     * @param usedUndeclaredArtifacts       artifacts used but not declared
-     * @param unusedDeclaredArtifacts       artifacts declared but not used
+     * @param usedDeclaredArtifacts artifacts both used and declared
+     * @param usedUndeclaredArtifacts artifacts used but not declared
+     * @param unusedDeclaredArtifacts artifacts declared but not used
      * @param testArtifactsWithNonTestScope artifacts only used in tests but not declared with test scope
      */
     public ProjectDependencyAnalysis(
@@ -153,7 +161,7 @@ public class ProjectDependencyAnalysis {
     /**
      * Returns artifacts only used in tests but not declared with test scope.
      *
-     * @return artifacts only used in tests but not declared with test scope
+     * @return  artifacts only used in tests but not declared with test scope
      */
     public Set<Artifact> getTestArtifactsWithNonTestScope() {
         return safeCopy(testArtifactsWithNonTestScope);
@@ -248,9 +256,7 @@ public class ProjectDependencyAnalysis {
         return hashCode;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object object) {
         if (object instanceof ProjectDependencyAnalysis) {

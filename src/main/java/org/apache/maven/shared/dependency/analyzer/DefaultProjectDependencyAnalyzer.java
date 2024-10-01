@@ -25,8 +25,15 @@ import javax.inject.Singleton;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.stream.Collectors;
@@ -54,9 +61,7 @@ public class DefaultProjectDependencyAnalyzer implements ProjectDependencyAnalyz
     @Inject
     private DependencyAnalyzer dependencyAnalyzer;
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public ProjectDependencyAnalysis analyze(MavenProject project, Collection<String> excludedClasses)
             throws ProjectDependencyAnalyzerException {
@@ -83,10 +88,13 @@ public class DefaultProjectDependencyAnalyzer implements ProjectDependencyAnalyz
             Set<Artifact> testOnlyArtifacts = removeAll(testArtifacts, mainUsedArtifacts);
 
             Set<Artifact> declaredArtifacts = buildDeclaredArtifacts(project);
-            Map<Artifact, Set<DependencyUsage>> usedDeclaredArtifactsWithClasses = new LinkedHashMap<>(usedArtifacts);
             Set<Artifact> usedDeclaredArtifacts = new LinkedHashSet<>(declaredArtifacts);
             usedDeclaredArtifacts.retainAll(usedArtifacts.keySet());
-            usedDeclaredArtifactsWithClasses.keySet().retainAll(usedDeclaredArtifacts);
+
+            Map<Artifact, Set<DependencyUsage>> usedDeclaredArtifactsWithClasses = new LinkedHashMap<>();
+            for (Artifact a : usedDeclaredArtifacts) {
+                usedDeclaredArtifactsWithClasses.put(a, usedArtifacts.get(a));
+            }
 
             Map<Artifact, Set<DependencyUsage>> usedUndeclaredArtifactsWithClasses = new LinkedHashMap<>(usedArtifacts);
             Set<Artifact> usedUndeclaredArtifacts =
